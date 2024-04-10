@@ -4,17 +4,18 @@ FROM ubuntu:jammy
 LABEL versio="x86-0.1"
 
 # Update and Install necessary packages
-RUN apt update && apt upgrade -y && apt install -y apt-utils
-
-RUN apt install -y curl \
-            git \
-            vim \
-            net-tools \
-            telnet \
-            zip \
-            python3 \
-            openssl \
-            sudo 
+RUN apt update && \
+    apt upgrade -y && \
+    apt install -y apt-utils \
+        curl \
+        git \
+        vim \
+        net-tools \
+        telnet \
+        zip \
+        python3 \
+        openssl \
+        sudo 
 
 # Install aws-cli
 RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
