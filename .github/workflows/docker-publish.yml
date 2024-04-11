@@ -73,7 +73,7 @@ jobs:
         with:
           context: ./All-tools-pod/x86/
           push: true
-          tags: latest
+          tags: ${{ steps.meta.outputs.tags }},madawa/all-tools:latest
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
