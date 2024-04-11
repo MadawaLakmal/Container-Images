@@ -1,7 +1,7 @@
 FROM ubuntu:jammy
 
 # Labelling the image
-LABEL versio="aarch64-0.1"
+LABEL versio="1.0"
 
 # Update and Install necessary packages
 RUN apt update && \
@@ -15,18 +15,15 @@ RUN apt update && \
         zip \
         python3 \
         openssl \
+        python3-pip \
         sudo 
 
 # Install aws-cli
-RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip" -o "awscliv2.zip" && \
-    unzip awscliv2.zip && \
-    bash ./aws/install && \
-    rm -rf aws*
+RUN pip3 install --upgrade pip \
+    && pip3 install awscli
 
 # Install azure-cli
-RUN curl https://aka.ms/InstallAzureCLIDeb -o azurecli && \
-    bash azurecli && \
-    rm -f azurecli
+RUN curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
     
 # Adding dev user and change password to 'password'
 RUN adduser dev 
