@@ -71,7 +71,7 @@ jobs:
         id: build-and-push-x86
         uses: docker/build-push-action@0565240e2d4ab88bba5387d719585280857ece09 # v5.0.0
         with:
-          context: ./All-tools-pod/x86/Dockerfile
+          context: ./All-tools-pod/x86/
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
@@ -82,7 +82,7 @@ jobs:
         id: build-and-push-aarm64
         uses: docker/build-push-action@0565240e2d4ab88bba5387d719585280857ece09 # v5.0.0
         with:
-          context: ./All-tools-pod/arm/Dockerfile
+          context: ./All-tools-pod/arm/
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
