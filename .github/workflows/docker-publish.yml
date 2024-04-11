@@ -28,5 +28,6 @@ jobs:
        - name: Build and push
          uses: docker/build-push-action@v3
          with:
+           context: ./All-tools-pod/
            push: true
            tags: madawa/all-tools:latest
