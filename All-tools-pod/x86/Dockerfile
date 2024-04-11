@@ -1,7 +1,7 @@
 FROM ubuntu:jammy
 
 # Labelling the image
-LABEL versio="x86-0.1"
+LABEL versio="x86"
 
 # Update and Install necessary packages
 RUN apt update && \
