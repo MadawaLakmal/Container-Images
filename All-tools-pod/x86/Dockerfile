@@ -24,9 +24,7 @@ RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2
     rm -rf aws*
 
 # Install azure-cli
-RUN curl https://aka.ms/InstallAzureCLIDeb -o azurecli && \
-    bash azurecli && \
-    rm -f azurecli
+RUN curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
     
 # Adding dev user and change password to 'password'
 RUN adduser dev 
