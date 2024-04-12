@@ -34,7 +34,7 @@ jobs:
         run: |
           docker buildx build \
           --platform linux/amd64,linux/arm64 \
-          --push --tag ${{ secrets.DOCKER_USER }}/test-repo:latest \
+          --push --tag ${{ secrets.DOCKER_USER }}/all-tools:latest \
           --file ./All-tools-pod/Dockerfile ./All-tools-pod/
 
       # # Manual approval step
