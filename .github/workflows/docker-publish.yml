@@ -1,39 +1,46 @@
-name: Build and Push Multiarch Docker Images
+name: Multi-arch Docker Build and Push
 
 on:
   push:
-    branches: [ master ]
-  workflow_dispatch:
+    branches:
+      - master
 
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
-    
+
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-      - name: Request approval
-        if: github.event.type == 'pull_request'
-        uses: jenkinsx/approvers@v4
-        with:
-          required: 1
-
+      # Authenticate with Docker Hub
       - name: Login to Docker Hub
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKER_USER }}
           password: ${{ secrets.DOCKER_PAT }}
 
-      - name: Setup Docker Buildx
+      # Set up QEMU (for emulation)
+      - name: Set up QEMU
+        if: runner.os == 'Linux'
+        uses: docker/setup-qemu-action@v2
+
+      # Set up Docker Buildx
+      - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
 
-      - name: Build and Push Multiarch Images
-        uses: docker/build-push-action@v3
-        with:
-          push: true
-          tags: ${{ secrets.DOCKER_USER }}/test-repo:latest
-          platforms: linux/amd64,linux/arm64  # Adjust architectures as needed
-          file: ./All-tools-pod/Dockerfile  # Replace with your Dockerfile path
+      # Build and push multi-architecture Docker images
+      - name: Build and push Docker image
+        run: |
+          docker buildx build \
+            --platform linux/amd64,linux/arm64 \
+            --push \
+            --tag ${{ secrets.DOCKER_USER }}/test-repo:latest \
+            --file ./All-tools-pod/Dockerfile
 
-      - name: Clean up Buildx
-        uses: docker/cleanup-buildx-action@v1
+      # # Manual approval step
+      # - name: Manual approval
+      #   if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+      #   uses: wei/github-approve-action@v2
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
