@@ -18,7 +18,9 @@ RUN apt update && \
         python3-pip \
         sudo 
 
-COPY installer.sh .
+RUN ls -al
+
+COPY 'installer.sh' .
 
 # Install aws-cli
 RUN chmod a+x installer.sh && bash ./installer.sh
