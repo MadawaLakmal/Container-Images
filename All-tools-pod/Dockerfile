@@ -18,9 +18,10 @@ RUN apt update && \
         python3-pip \
         sudo 
 
+COPY installer.sh .
+
 # Install aws-cli
-RUN pip3 install --upgrade pip \
-    && pip3 install awscli
+RUN chmod a+x installer.sh && bash ./installer.sh
 
 # Install azure-cli
 RUN curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
