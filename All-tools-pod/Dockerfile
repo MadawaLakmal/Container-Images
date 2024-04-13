@@ -16,6 +16,7 @@ RUN apt update && \
         python3 \
         openssl \
         python3-pip \
+        groff \
         sudo && \
     apt autoremove -y
 
