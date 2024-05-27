@@ -19,7 +19,8 @@ RUN mkdir -p /var/cache/nginx/client_temp && \
 
 # Set permissions for configuration files and directories
 RUN chmod -R 755 /etc/nginx/conf.d && \
-    chmod 644 /etc/nginx/nginx.conf
+    chmod 644 /etc/nginx/nginx.conf && \
+    chmod -R 755 /var/cache/nginx
 
 # Switch to the non-root user
 USER 10014
