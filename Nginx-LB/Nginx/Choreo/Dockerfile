@@ -23,7 +23,7 @@ RUN mkdir -p /var/cache/nginx/client_temp && \
     chown -R ${NGINX_RUN_USER}:${NGINX_RUN_GROUP} /var/run/nginx.pid
 
 # Change ownership of the website directory
-RUN setfacl -R -m u:${NGINX_RUN_USER_UID}:rwx /usr/share/nginx/html
+RUN setfacl -R -m u:${NGINX_RUN_USER}:rwx /usr/share/nginx/html
 
 # Expose the default Nginx port
 EXPOSE ${PORT}
