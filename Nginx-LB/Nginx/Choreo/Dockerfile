@@ -20,7 +20,7 @@ WORKDIR /usr/share/nginx/html
 RUN mkdir -p /var/cache/nginx/client_temp && \
     chown -R ${NGINX_RUN_USER}:${NGINX_RUN_GROUP} /var/cache/nginx && \
     touch /var/run/nginx.pid && \
-    chown -R ${NGINX_RUN_USER}:${NGINX_RUN_GROUP} /var/run/nginx.pid \
+    chown -R ${NGINX_RUN_USER}:${NGINX_RUN_GROUP} /var/run/nginx.pid && \
     setfacl -R -m u:${NGINX_RUN_USER}:rwx /etc/nginx/conf.d/
 
 # Change ownership of the website directory
