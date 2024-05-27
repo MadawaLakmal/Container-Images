@@ -18,9 +18,9 @@ WORKDIR /usr/share/nginx/html
 
 # Create necessary directories with appropriate permissions
 RUN mkdir -p /var/cache/nginx/client_temp && \
-    chown -R ${NGINX_RUN_USER_UID}:${NGINX_RUN_USER_UID} /var/cache/nginx && \
+    chown -R ${NGINX_RUN_USER}:${NGINX_RUN_GROUP} /var/cache/nginx && \
     touch /var/run/nginx.pid && \
-    chown -R ${NGINX_RUN_USER_UID}:${NGINX_RUN_USER_UID} /var/run/nginx.pid
+    chown -R ${NGINX_RUN_USER}:${NGINX_RUN_GROUP} /var/run/nginx.pid
 
 # Change ownership of the website directory
 RUN setfacl -R -m u:${NGINX_RUN_USER_UID}:rwx /usr/share/nginx/html
@@ -32,7 +32,7 @@ EXPOSE ${PORT}
 VOLUME /usr/share/nginx/html
 
 # Configure Nginx to run with the non-root user
-USER 10014
+USER choreo
 
 # Start Nginx
 CMD ["nginx", "-g", "daemon off;"]
