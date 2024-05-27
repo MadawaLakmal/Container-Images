@@ -32,7 +32,7 @@ EXPOSE ${PORT}
 VOLUME /usr/local/apache2/htdocs
 
 # Configure Apache to run with the non-root user
-USER ${APACHE_RUN_USER_UID}
+USER 10014
 
 # Start Apache
 CMD ["httpd", "-D", "FOREGROUND"]
